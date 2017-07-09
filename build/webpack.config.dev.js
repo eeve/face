@@ -18,6 +18,7 @@ module.exports = merge(base, {
     inline: true,
     compress: true,
     contentBase: '../dist',
+    disableHostCheck: true,
     host: '0.0.0.0',
 		port: 4000
   }

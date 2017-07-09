@@ -5,18 +5,18 @@ let HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
   entry: {
     'js/lib': [ 'vue' ],
-    'js/app': path.resolve(__dirname, '../src/index')
+    'app': path.resolve(__dirname, '../src/index')
   },
   output: {
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/',
     libraryTarget: 'umd',
-    filename: '[name]-[chunkhash:6].js'
+    filename: 'js/[name]-[chunkhash:6].js'
   },
   resolve: {
     extensions: ['.js', '.vue', '.less'],
     alias: {
-      vue: 'vue/dist/vue.js'
+      vue: 'vue/dist/vue.common.js'
     }
   },
   module: {
@@ -39,7 +39,7 @@ module.exports = {
 			{
         test: /\.css$/,
         use: [ 'style-loader', 'css-loader' ],
-        exclude: /node_modules/
+        // exclude: /node_modules/
       },
       {
         test: /\.less$/,
@@ -54,13 +54,19 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
     	name: 'js/lib',
     	filename: 'js/lib-[hash].min.js'
     }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    }),
     new HtmlWebpackPlugin({
       inject: true,
-      chunks: ['js/lib', 'js/app'],
+      chunks: ['js/lib', 'app'],
       filename: path.resolve(__dirname, '../dist/index.html'),
       template: path.resolve(__dirname, '../src/index.html')
     })
