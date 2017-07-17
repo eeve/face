@@ -1,6 +1,7 @@
 let webpack = require('webpack');
 let path = require('path');
 let HtmlWebpackPlugin = require('html-webpack-plugin')
+let CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -54,6 +55,9 @@ module.exports = {
     ]
   },
   plugins: [
+    new CopyWebpackPlugin([
+			{ from: path.resolve(__dirname, '../src/CNAME') }
+		]),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
     	name: 'js/lib',
