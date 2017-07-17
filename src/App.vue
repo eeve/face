@@ -74,6 +74,18 @@
     padding: 0;
   }
 
+  html, body {
+    background: #ddd;
+  }
+
+  .face-maker {
+    position: relative;
+    max-width: 640px;
+    height: 100%;
+    margin: 0 auto;
+    background: #eee;
+  }
+
   .header {
     width: 100%;
     height: 1rem;
@@ -129,8 +141,8 @@
     text-align: center;
   }
   .wepay, .alipay {
-    width: 100%;
-    height: 100%;
+    display: inline-block;
+    height: 200px;
     -webkit-user-select: none;
     -webkit-touch-callout: none;
   }
